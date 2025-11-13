@@ -1,6 +1,6 @@
 
 [package]
-name = "tradehub"
+name = "trades-hub"
 version = "0.1.0"
 edition = "2021"
 
