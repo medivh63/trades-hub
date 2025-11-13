@@ -1,0 +1,60 @@
+
+{% extends "layout.html" %}
+{% block title %}首页 · TradeHub{% endblock %}
+{% block content %}
+<section class="location-banner" id="location-banner">
+  <div class="location-info">
+    <strong>检测你所在的城市</strong>
+    <p>允许使用浏览器的定位权限，以便优先展示附近的技工；也可以手动输入邮编。</p>
+  </div>
+  <div class="location-actions">
+    <button type="button" data-use-location>使用当前位置</button>
+    <form data-postal-form>
+      <input name="postal" placeholder="输入邮编" autocomplete="postal-code">
+      <button type="submit">确认</button>
+    </form>
+  </div>
+  <div class="location-status" data-location-status>尚未获取定位。</div>
+</section>
+<div id="results">
+  <ol class="story-list">
+    {% if listings.is_empty() %}
+      <li class="story-item story-empty">
+        <div class="story-vote">
+          <span class="vote-triangle">△</span>
+          <span class="story-score">0</span>
+        </div>
+        <div class="story-body">
+          <div class="story-title-line">
+            <span class="story-title">暂时没有可展示的技工</span>
+          </div>
+          <div class="story-meta">添加数据或使用搜索框查找特定服务。</div>
+        </div>
+      </li>
+    {% else %}
+      {% for item in listings %}
+      <li class="story-item">
+        <div class="story-vote">
+          <span class="vote-triangle">△</span>
+          <span class="story-score">{{ item.score }}</span>
+        </div>
+        <div class="story-body">
+          <div class="story-title-line">
+            <a class="story-title" href="/listings/{{ item.id }}">{{ item.title }}</a>
+            <span class="story-domain">{{ item.city }}</span>
+          </div>
+          <div class="story-meta">via {{ item.city }} · {{ item.tag_summary }}</div>
+          {% if item.has_tags %}
+            <div class="story-tags">
+              {% for tag in item.tags %}
+                <span class="story-tag">{{ tag }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      </li>
+      {% endfor %}
+    {% endif %}
+  </ol>
+</div>
+{% endblock %}

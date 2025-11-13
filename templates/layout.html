@@ -1,0 +1,43 @@
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{% block title %}TradeHub{% endblock %}</title>
+  <link href="/static/tailwind.css" rel="stylesheet"/>
+  <script src="https://unpkg.com/htmx.org@2.0.2"></script>
+  <script defer src="/static/app.js"></script>
+</head>
+<body class="min-h-screen bg-gray-50 text-slate-800">
+  <header class="site-header">
+    <div class="site-container header-inner">
+      <a href="/" class="site-logo">TradeHub</a>
+      <div class="header-right">
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/" class="nav-link nav-link--active">最新</a>
+          <a href="/listings" class="nav-link">热门</a>
+          <a href="/comments" class="nav-link">留言</a>
+          <a href="/search" class="nav-link">更多</a>
+        </nav>
+        <div class="nav-actions">
+          <form class="nav-search"
+                hx-get="/search"
+                hx-target="#results"
+                hx-swap="innerHTML"
+                role="search"
+                aria-label="搜索 listings">
+            <input id="global-search-input" type="search" name="q" placeholder="搜索：电工、暖通..." />
+            <button type="submit">搜索</button>
+          </form>
+          <a href="/auth/login" class="nav-login">登录</a>
+          <a href="/auth/register" class="nav-register">注册</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="site-container main-panel">
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

@@ -1,0 +1,12 @@
+
+# Rust / Cargo
+/target
+**/*.rs.bk
+# IDE
+.idea
+.vscode
+# Env & DB
+.env
+tradehub.db
+*.sqlite3
+*.db*
