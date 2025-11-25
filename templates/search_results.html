@@ -1,0 +1,39 @@
+<ol class="story-list">
+  {% if listings.is_empty() %}
+    <li class="story-item story-empty">
+      <div class="story-vote">
+        <span class="vote-triangle">△</span>
+        <span class="story-score">0</span>
+      </div>
+      <div class="story-body">
+        <div class="story-title-line">
+          <span class="story-title">没有匹配的技工</span>
+        </div>
+        <div class="story-meta">换个关键词再试试。</div>
+      </div>
+    </li>
+  {% else %}
+    {% for item in listings %}
+    <li class="story-item">
+      <div class="story-vote">
+        <span class="vote-triangle">△</span>
+        <span class="story-score">{{ item.score }}</span>
+      </div>
+      <div class="story-body">
+        <div class="story-title-line">
+          <a class="story-title" href="/listings/{{ item.id }}">{{ item.title }}</a>
+          <span class="story-domain">{{ item.city }}</span>
+        </div>
+        {% if item.has_tags %}
+          <div class="story-tags">
+            {% for tag in item.tags %}
+              <span class="story-tag">{{ tag }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </li>
+    {% endfor %}
+  {% endif %}
+</ol>
+
