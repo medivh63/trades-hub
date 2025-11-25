@@ -3,6 +3,15 @@
 {% block title %}首页 · TradeHub{% endblock %}
 {% block content %}
 <section class="location-banner" id="location-banner">
+  <button
+    type="button"
+    class="location-close"
+    data-location-close
+    aria-label="关闭定位提示"
+    onclick="this.closest('#location-banner')?.remove();"
+  >
+    ×
+  </button>
   <div class="location-info">
     <strong>检测你所在的城市</strong>
     <p>允许使用浏览器的定位权限，以便优先展示附近的技工；也可以手动输入邮编。</p>
@@ -43,7 +52,7 @@
             <a class="story-title" href="/listings/{{ item.id }}">{{ item.title }}</a>
             <span class="story-domain">{{ item.city }}</span>
           </div>
-          <div class="story-meta">via {{ item.city }} · {{ item.tag_summary }}</div>
+          <!-- <div class="story-meta">via {{ item.city }} · {{ item.tag_summary }}</div> -->
           {% if item.has_tags %}
             <div class="story-tags">
               {% for tag in item.tags %}
